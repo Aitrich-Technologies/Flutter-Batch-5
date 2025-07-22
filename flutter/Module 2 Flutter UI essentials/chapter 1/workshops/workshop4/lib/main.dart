@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:workshop4/details.dart';
+
+import 'package:workshop4/my.dart';
+
+
+
 
 void main(){
   runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Details_screen(),
+    home:Details_screen12(),
   ));
 }

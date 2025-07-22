@@ -17,6 +17,7 @@ class Profilescreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          CircleAvatar(radius: 80,backgroundImage: AssetImage("image/cat.jpg"),),
           const Text(
             "Mia",
             style: TextStyle(fontSize: 30),
@@ -114,6 +115,9 @@ class Profilescreen extends StatelessWidget {
               ))
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(onPressed: (){}
+      ,child: Icon(Icons.download_done,color: Colors.deepOrangeAccent,),),
     );
   }
 }
