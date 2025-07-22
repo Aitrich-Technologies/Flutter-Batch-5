@@ -16,6 +16,11 @@ class _HomescreenState extends State<Homescreen> {
     });
   }
 
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +30,7 @@ class _HomescreenState extends State<Homescreen> {
         title: const Text('Empetz'),
         centerTitle: true,
       ),
-      body: Center(
-        child: _selectedIndex == 0 ? const HomeScreen() : const ProfileScreen(),
-      ),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -48,140 +51,125 @@ class _HomescreenState extends State<Homescreen> {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    super.key,
-  });
+  const HomeScreen({super.key});
+
+  void _showAddPostDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Add Post"),
+          content: const Text("Do you want to add a post?"),
+          actions: [
+            TextButton(
+              child: const Text("Yes"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
-        onPressed: () {},
+        onPressed: () => _showAddPostDialog(context),
         child: const Icon(Icons.add),
       ),
       body: GridView.count(
-        crossAxisCount: 2, // Number of columns in the grid
-        mainAxisSpacing: 20.0, // Spacing between rows
-        crossAxisSpacing: 20.0, // Spacing between columns
+        crossAxisCount: 2,
+        mainAxisSpacing: 20.0,
+        crossAxisSpacing: 20.0,
         padding: const EdgeInsets.all(16.0),
         children: [
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat2.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat1.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat2.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat2.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            child: Image.asset(
-              'assets/cat1.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
+          _buildImageContainer('assets/cat.jpg'),
+          _buildImageContainer('assets/cat2.jpg'),
+          _buildImageContainer('assets/cat1.jpg'),
+          _buildImageContainer('assets/cat.jpg'),
+          _buildImageContainer('assets/cat.jpg'),
+          _buildImageContainer('assets/cat2.jpg'),
+          _buildImageContainer('assets/cat2.jpg'),
+          _buildImageContainer('assets/cat1.jpg'),
         ],
+      ),
+    );
+  }
+
+  Widget _buildImageContainer(String imagePath) {
+    return Container(
+      color: Colors.green,
+      child: Image.asset(
+        imagePath,
+        fit: BoxFit.cover,
       ),
     );
   }
 }
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({
-    super.key,
-  });
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 50,
-              backgroundImage:
-                  AssetImage('assets/cat1.jpg'), // Replace with your image
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Aitrich',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            const Card(
-              child: ListTile(
-                leading: Icon(Icons.phone),
-                title: Text('Phone Number'),
-                subtitle: Text('+1234567890'),
+        child: SingleChildScrollView( // for better handling in small screens
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/cat1.jpg'),
               ),
-            ),
-            const Card(
-              child: ListTile(
-                leading: Icon(Icons.email),
-                title: Text('Email'),
-                subtitle: Text('example@example.com'),
+              const SizedBox(height: 20),
+              const Text(
+                'Aitrich',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            ),
-            const Card(
-              child: ListTile(
-                leading: Icon(Icons.person),
-                title: Text('Username'),
-                subtitle: Text('username123'),
+              const SizedBox(height: 20),
+              const Card(
+                child: ListTile(
+                  leading: Icon(Icons.phone),
+                  title: Text('Phone Number'),
+                  subtitle: Text('+1234567890'),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
-              onPressed: () {},
-              child: const Text(
-                'Submit',
-                style: TextStyle(color: Colors.black),
+              const Card(
+                child: ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('Email'),
+                  subtitle: Text('example@example.com'),
+                ),
               ),
-            ),
-          ],
+              const Card(
+                child: ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('Username'),
+                  subtitle: Text('username123'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+                onPressed: () {},
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
