@@ -9,7 +9,7 @@ class Actv2 extends StatefulWidget {
 
 class _Actv2State extends State<Actv2> {
   // ignore: unused_field
-  int _selectedValue = 1;
+  int _selectedValue = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
