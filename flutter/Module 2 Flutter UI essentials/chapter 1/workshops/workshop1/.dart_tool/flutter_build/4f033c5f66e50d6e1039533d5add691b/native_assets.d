@@ -1,0 +1,1 @@
+ E:\\Flutter-batch-04\\flutter\\module\ 2\ flutter\ ui\ essentials\\chapter\ 1\\Workshops\\workshop1\\.dart_tool\\flutter_build\\4f033c5f66e50d6e1039533d5add691b\\native_assets.yaml: 
