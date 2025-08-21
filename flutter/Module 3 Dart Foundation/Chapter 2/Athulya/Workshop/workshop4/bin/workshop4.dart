@@ -2,10 +2,10 @@ void main()
 {
   PositionedParameters('Parameter 1','parameter 2');
   PositionedParameters('Parameter 1');
+  print('');
   NamedParameters(two:'parameter 2',one:'parameter 1');
-  DefaultParameteres('parameter 1');
-  DefaultParameteres('parameter 1',two: 'parameter 2');
-   
+  print('');
+  
 }
 
 void PositionedParameters(String ? one, [String ? two]) {
@@ -18,8 +18,5 @@ void NamedParameters({String ? one, String ? two}) {
   print('parameter two : $two');
 }
 
-void DefaultParameteres(String?one,{String ?two='hyy'}){
-  print('Parameter one : $one');
-  print('Parameter two : $two');
-}
+
 

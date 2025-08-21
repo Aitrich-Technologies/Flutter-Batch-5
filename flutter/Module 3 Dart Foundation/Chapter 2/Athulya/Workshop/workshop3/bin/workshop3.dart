@@ -7,7 +7,7 @@ void main()
 
   void function1()
   {
-  print('It just a function');
+  
   }
 
   String function2()
@@ -15,7 +15,7 @@ void main()
     return 'This is returned string';
   }
 
-  void function3(str)
+  void function3(String str)
   {
     print(str);
   }
