@@ -1,14 +1,13 @@
 void main(List<String> args) {
   var y = cs();
   y.function();
-  var x = cs.name();
-  x.function();
+  var yy = cs.name();
+  yy.function();
 }
 
 class cs {
-  
-    cs() {
-    print('This is from default control');
+  cs() {
+    
   }
   cs.name() {
       print('This is from named constructor');
