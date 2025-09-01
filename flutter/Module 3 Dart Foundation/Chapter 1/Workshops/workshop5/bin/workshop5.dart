@@ -3,7 +3,7 @@ void main() {
 
   switch (grade) {
     case 'A':
-      print('Excellent!');
+      print('Fair!');
       break;
     case 'B':
       print('Good!');
