@@ -5,8 +5,8 @@ void main(List<String> args) {
   int b = 10;
   print(b);
 
-double c=0.1888;
-print(c);
+  double c = 0.1888;
+  print(c);
 
   bool d = false;
   print(d);
