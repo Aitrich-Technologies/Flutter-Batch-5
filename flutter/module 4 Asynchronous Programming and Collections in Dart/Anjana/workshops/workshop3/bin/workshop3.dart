@@ -5,13 +5,7 @@ void main() {
   // Print the list
   print('My favorite Animals: $favoriteAnimals');
 
-  // Add a new animal to the list
-  favoriteAnimals.add("cheetah");
-  print("after adding cheetah:$favoriteAnimals");
-
-  // Remove an animal from the list
-  favoriteAnimals.remove('Dog');
-  print('After removing Dog: $favoriteAnimals');
+  // Add a new animal to the listg: $favoriteAnimals');
 
   // Check if the list contains a specific animal
   if (favoriteAnimals.contains("Cat")) {
@@ -22,3 +16,9 @@ void main() {
   }
   
 }
+  favoriteAnimals.add("cheetah");
+  print("after adding cheetah:$favoriteAnimals");
+
+  // Remove an animal from the list
+  favoriteAnimals.remove('Dog');
+  print('After removing Do
