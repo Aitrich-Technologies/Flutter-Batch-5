@@ -5,7 +5,7 @@ void main()
   print('');
   NamedParameters(two:'parameter 2',one:'parameter 1');
   print('');
-  
+  Default('parameter 1',);
 }
 
 void PositionedParameters(String ? one, [String ? two]) {
@@ -18,5 +18,8 @@ void NamedParameters({String ? one, String ? two}) {
   print('parameter two : $two');
 }
 
-
+void Default(String one,{String two="hlo"}){
+  print('parameter one:$two');
+  print('parameter two:$one');
+}
 
