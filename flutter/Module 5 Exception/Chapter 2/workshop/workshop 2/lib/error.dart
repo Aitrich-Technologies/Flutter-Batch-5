@@ -12,11 +12,7 @@ class _ErrorsState extends State<Errors> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Container(
-        color: Colors.blue,
-        decoration: const BoxDecoration(),
-      )),
-    );
+      backgroundColor: Colors.blue
+      );
   }
 }
