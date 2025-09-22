@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,14 +16,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
 
   @override
   _FormScreenState createState() => _FormScreenState();
 }
-
 class _FormScreenState extends State<FormScreen> {
   final _formKey = GlobalKey<FormState>();
 
@@ -39,7 +35,8 @@ class _FormScreenState extends State<FormScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
-          child: Column(
+          
+          child: SingleChildScrollView(child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -57,7 +54,7 @@ class _FormScreenState extends State<FormScreen> {
                     // Process form data
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                          content: Text('Form submitted successfully')),
+                       content: Text('Form submitted successfully')),
                     );
                   }
                 },
@@ -67,6 +64,6 @@ class _FormScreenState extends State<FormScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
