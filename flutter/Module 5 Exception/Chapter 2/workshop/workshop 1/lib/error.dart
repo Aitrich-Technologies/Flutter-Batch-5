@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,14 +16,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
 
   @override
   _FormScreenState createState() => _FormScreenState();
 }
-
 class _FormScreenState extends State<FormScreen> {
   final _formKey = GlobalKey<FormState>();
 
@@ -35,6 +31,7 @@ class _FormScreenState extends State<FormScreen> {
       appBar: AppBar(
         title: const Text('Form Screen'),
       ),
+<<<<<<< HEAD
 
       body: SingleChildScrollView(
         child: Padding(
@@ -51,6 +48,22 @@ class _FormScreenState extends State<FormScreen> {
                       border: const OutlineInputBorder(),
                       labelText: 'Field $i',
                     ),
+=======
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Form(
+          key: _formKey,
+          
+          child: SingleChildScrollView(child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              for (var i = 1; i <= 15; i++)
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: 'Field $i',
+>>>>>>> 4433ca6f88e4896f184495f5af6ee9f95170c11e
                   ),
                 const SizedBox(height: 20),
                 ElevatedButton(
@@ -65,11 +78,28 @@ class _FormScreenState extends State<FormScreen> {
                   },
                   child: const Text('Submit'),
                 ),
+<<<<<<< HEAD
               ],
             ),
+=======
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    // Process form data
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                       content: Text('Form submitted successfully')),
+                    );
+                  }
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+>>>>>>> 4433ca6f88e4896f184495f5af6ee9f95170c11e
           ),
         ),
       ),
-    );
+    ));
   }
 }
