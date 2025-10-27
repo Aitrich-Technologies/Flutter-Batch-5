@@ -1,5 +1,7 @@
 
 
+
+
 import 'package:activitycalcu/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -14,34 +16,41 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
   String num1 = "";
   String num2 = "";
   String operand = "";
+
   @override
   Widget build(BuildContext context) {
     final screensize = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
         children: [
+          // ✅ Display Area
           Expanded(
             child: SingleChildScrollView(
               reverse: true,
-              child: Container(
-                child: SafeArea(
-                  child: Container(
-                    alignment: Alignment.topRight,
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      "$num1$operand$num2".isEmpty ? "0" : "$num1$operand$num2",
-                      style: TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.end,
+              child: SafeArea(
+                child: Container(
+                  alignment: Alignment.bottomRight,
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    (num1.isEmpty && operand.isEmpty && num2.isEmpty)
+                        ? "0"
+                        : operand.isEmpty
+                            ? num1
+                            : num2.isEmpty
+                                ? num1
+                                : num2,
+                    style: const TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold,
                     ),
+                    textAlign: TextAlign.end,
                   ),
                 ),
               ),
             ),
           ),
-          //button
+
+          // ✅ Button Grid
           Wrap(
             children: Btn.buttonvalues
                 .map(
@@ -60,22 +69,34 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
     );
   }
 
+  // ✅ Button Builder
   Widget buildbutton(value) {
+    bool isZero = value == Btn.n0;
+    final screensize = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Material(
         color: getBtncolor(value),
         clipBehavior: Clip.hardEdge,
-        shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(100),
-          borderSide: BorderSide(color: Colors.white24),
-        ),
+        shape: isZero
+            ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))
+            : const CircleBorder(),
+        elevation: 4,
+        shadowColor: Colors.black54,
         child: InkWell(
           onTap: () => onbtntap(value),
-          child: Center(
-            child: Text(
-              value,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          child: Container(
+            alignment: Alignment.center,
+            padding: isZero
+                ? EdgeInsets.only(right: screensize.width * 0.25)
+                : EdgeInsets.zero,
+            child: Center(
+              child: Text(
+                value,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ),
@@ -83,133 +104,148 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
     );
   }
 
+  // ✅ Main Tap Function
   void onbtntap(String value) {
-    if (value==Btn.del) {
-      delete();
+    if (value == Btn.del) {
+      clearAll();
       return;
     }
-    if (value==Btn.clr) {
-      clearAll();
-      return;     
-    }
-    if (value==Btn.per) {
+    if (value == Btn.per) {
       convertopercentage();
       return;
     }
-    if (value==Btn.equal) {
+    if (value == Btn.equal) {
       equal();
       return;
     }
+
+    // 🆕 Sign toggle logic
+    if (value == Btn.bar) {
+      toggleSign();
+      return;
+    }
+
     appendValue(value);
   }
-  void equal(){
-    if(num1.isEmpty)return;
-    if(operand.isEmpty)return;
-    if(num2.isEmpty)return;
 
-   final double number1 = double.parse(num1);
-   final double number2 = double.parse(num2);
-   var result = 0.0;
-   switch (operand) {
-     case Btn.add:
-     result=number1 + number2 ;
-     case Btn.sub:
-     result=number1 - number2 ;
-     case Btn.multiply:
-     result=number1 * number2 ;
-     case Btn.div:
-     result=number1 / number2 ;
-       break;
-     default:
-   }
-   setState(() {
-     num1 = "$result";
-     if(num1.endsWith(".0")){
-      num1 = num1.substring(0,num1.length - 2);
-     }
-
-     operand="";
-     num2="";
-   });
+  // 🆕 Sign toggle logic
+  void toggleSign() {
+    setState(() {
+      if (operand.isEmpty) {
+        if (num1.startsWith('-')) {
+          num1 = num1.substring(1);
+        } else if (num1.isNotEmpty) {
+          num1 = '-$num1';
+        }
+      } else {
+        if (num2.startsWith('-')) {
+          num2 = num2.substring(1);
+        } else if (num2.isNotEmpty) {
+          num2 = '-$num2';
+        }
+      }
+    });
   }
-  void convertopercentage(){
-    if(num1.isNotEmpty&&operand.isNotEmpty&&num2.isNotEmpty&&operand.isNotEmpty){
+
+  // ✅ Perform Calculation
+  void equal() {
+    if (num1.isEmpty) return;
+    if (operand.isEmpty) return;
+    if (num2.isEmpty) return;
+
+    final double number1 = double.parse(num1);
+    final double number2 = double.parse(num2);
+    double result = 0.0;
+
+    switch (operand) {
+      case Btn.add:
+        result = number1 + number2;
+        break;
+      case Btn.sub:
+        result = number1 - number2;
+        break;
+      case Btn.multiply:
+        result = number1 * number2;
+        break;
+      case Btn.div:
+        result = number1 / number2;
+        break;
+      default:
+        return;
+    }
+
+    setState(() {
+      num1 = "$result";
+      if (num1.endsWith(".0")) {
+        num1 = num1.substring(0, num1.length - 2);
+      }
+      operand = "";
+      num2 = "";
+    });
+  }
+
+  // ✅ Percentage Conversion
+  void convertopercentage() {
+    if (num1.isNotEmpty && operand.isNotEmpty && num2.isNotEmpty) {
       equal();
     }
-    if (operand.isNotEmpty) {
-      return;
-    }
+    if (operand.isNotEmpty) return;
+
     final number = double.parse(num1);
     setState(() {
-      num1="${(number / 100)}";
-    operand="";
-    num2="";
-      
-    });
-  }
- void clearAll(){
-  setState(() {
-    num1="";
-    operand="";
-    num2="";
-  });
- }
-
-  void delete(){
-    if (num2.isNotEmpty) {
-      num2=num2.substring(0,num2.length - 1);
-      
-    }else if(operand.isNotEmpty){
+      num1 = "${(number / 100)}";
       operand = "";
-    }else if (num1.isNotEmpty){
-      num1=num1.substring(0,num1.length - 1);
-    }
-    setState(() {
-      
+      num2 = "";
     });
   }
-  void appendValue (String value){
-    if (value!=Btn.dot&&int.tryParse(value)==null) {
-      if (operand.isNotEmpty&&num2.isNotEmpty) {
+
+  // ✅ Clear All
+  void clearAll() {
+    setState(() {
+      num1 = "";
+      operand = "";
+      num2 = "";
+    });
+  }
+  
+  // ✅ Handle Input Appending
+  void appendValue(String value) {
+    if (value != Btn.dot && int.tryParse(value) == null) {
+      if (operand.isNotEmpty && num2.isNotEmpty) {
         equal();
       }
       operand = value;
-
-      
-    }else if(num1.isEmpty||operand.isEmpty){
-      if (value==Btn.dot && num1.contains(Btn.dot)) return;
-      if (value==Btn.dot && (num1.isEmpty || num1==Btn.n0)) {
-        value = "0.";
+    } else if (operand.isEmpty) { 
+      if (num1 == "0" && value != Btn.dot) {
+        num1 = value;
+      }else{
+      if (value == Btn.dot && num1.contains(Btn.dot)) return;
+      if (value == Btn.dot && (num1.isEmpty || num1 == Btn.n0)) {
+        value = ".";
       }
       num1 += value;
-      
-    }else if(num2.isEmpty||operand.isEmpty){
-      if (value==Btn.dot && num2.contains(Btn.dot)) return;
-      if (value==Btn.dot && (num2.isEmpty || num2==Btn.n0)) {
-        value = "0.";
+    } }else {
+      if (value == Btn.dot && num2.contains(Btn.dot)) return;
+      if (value == Btn.dot && (num2.isEmpty || num2 == Btn.n0)) {
+        value = ".";
       }
       num2 += value;
-      
     }
-    
-    setState(() {
-
-    });
+    setState(() {});
   }
 
+  // ✅ Button Color Logic
   Color getBtncolor(value) {
-    return [Btn.del, Btn.clr].contains(value)
-        ? Colors.blueGrey
+    return [Btn.del, Btn.bar, Btn.per].contains(value)
+        ? const Color.fromARGB(255, 137, 138, 139)
         : [
-            Btn.per,
             Btn.multiply,
             Btn.div,
             Btn.sub,
             Btn.add,
-            Btn.dot,
             Btn.equal,
           ].contains(value)
-        ? Colors.orange
-        : Colors.black87;
+            ? Colors.orange
+            : const Color.fromARGB(221, 57, 56, 56);
   }
 }

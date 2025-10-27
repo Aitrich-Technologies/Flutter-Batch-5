@@ -1,6 +1,6 @@
 class Btn {
-static const String del = "D"; 
-static const String clr = "C"; 
+static const String del = "AC"; 
+static const String bar = "+/-"; 
 static const String per = "%"; 
 static const String multiply = "x"; 
 static const String div = "/"; 
@@ -23,7 +23,7 @@ static const String n9 = "9";
 
 static const List<String> buttonvalues =[
   del,
-  clr,
+  bar,
   per,
   multiply,
   n7,
@@ -39,8 +39,9 @@ static const List<String> buttonvalues =[
   n3,
   add,
   n0,
-  equal,
   dot,
+  equal,
+  
 ];
 
 
