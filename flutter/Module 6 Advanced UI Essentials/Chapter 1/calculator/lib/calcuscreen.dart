@@ -19,7 +19,7 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screensize = MediaQuery.of(context).size;
+    final screensize = MediaQuery.of(context).size; //is fn for geting scrn wdth and higt
     return Scaffold(
       body: Column(
         children: [
@@ -33,12 +33,12 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     (num1.isEmpty && operand.isEmpty && num2.isEmpty)
-                        ? "0"
-                        : operand.isEmpty
+                        ? "0"                 //Nothing typed yet → show 0
+                        : operand.isEmpty      //Only first number typed (no operator yet)
                             ? num1
-                            : num2.isEmpty
+                            : num2.isEmpty      // Operator pressed but second number not yet typed
                                 ? num1
-                                : num2,
+                                : num2,          //Second number typing or already typed
                     style: const TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
                         ? screensize.width / 2
                         : (screensize.width / 4),
                     height: screensize.width / 5,
-                    child: buildbutton(value),
+                    child: buildbutton(value),           //function to build each button design.
                   ),
                 )
                 .toList(),
@@ -71,7 +71,7 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
 
   // ✅ Button Builder
   Widget buildbutton(value) {
-    bool isZero = value == Btn.n0;
+    bool isZero = value == Btn.n0;      //is button 0 ano ennu nokunu
     final screensize = MediaQuery.of(context).size;
 
     return Padding(
