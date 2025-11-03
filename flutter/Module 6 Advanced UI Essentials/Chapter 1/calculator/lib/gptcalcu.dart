@@ -210,7 +210,6 @@ void toggleSign() {
       }
     });
   }
-
   // ✅ Function: percentage
   
 void convertPercentage() {
@@ -226,23 +225,14 @@ void convertPercentage() {
     }
   }); 
 } 
-
-  // ✅ Function: calculation logic
+// ✅ Function: calculation logic
   void calculateResult() {
-  // 🔹 Check cheyyuka – num1, operand, num2 okke fill cheythitundano
-  // If any one is empty → calculation cheyyaruthu
+  
   if (num1.isEmpty || operand.isEmpty || num2.isEmpty) return;
-
-  // 🔹 String → double aakkanam (because mathematical operation venam)
   double n1 = double.parse(num1);
   double n2 = double.parse(num2);
-
-  // 🔹 Result store cheyyan oru variable
   double result = 0;
-
-  // 🔹 switch case use cheyyunnu – operator depend aayi operation select cheyyan
   switch (operand) {
-
     case Btn.add:        // If operator "+" aanel addition cheyyuka
       result = n1 + n2;
       break;
