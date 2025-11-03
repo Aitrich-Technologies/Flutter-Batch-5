@@ -11,11 +11,14 @@ class Favorites2 extends StatefulWidget {
 
 class _Favorites2State extends State<Favorites2> {
   bool isDarkThemeEnabled = false;
+  
+ 
 
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: isDarkThemeEnabled ? ThemeData.dark() : ThemeData.light(),
+      
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.orange,
@@ -25,6 +28,8 @@ class _Favorites2State extends State<Favorites2> {
             IconButton(
               onPressed: () {
                 setState(() {
+                 isDarkThemeEnabled=!isDarkThemeEnabled;
+                 
             // Add dark mode activation here      
                 });
               },
