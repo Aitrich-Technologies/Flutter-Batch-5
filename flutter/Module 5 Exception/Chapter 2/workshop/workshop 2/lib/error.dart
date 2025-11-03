@@ -12,6 +12,10 @@ class _ErrorsState extends State<Errors> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
+      backgroundColor: Colors.blue
+      );
+=======
       backgroundColor: Colors.blueAccent
       // body: Center(
       //     child: Container(
@@ -20,5 +24,6 @@ class _ErrorsState extends State<Errors> {
       // )
       // ),
     );
+>>>>>>> 4433ca6f88e4896f184495f5af6ee9f95170c11e
   }
 }
