@@ -16,19 +16,42 @@ class _ThemingExample45State extends State<ThemingExample45> {
         appBar: AppBar(
           title: Text('Dynamic Theming Example'),
         ),
-       body: Center(
-          // Add your circle avatar properties here
-             child:      
-                  ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    isDarkMode = !isDarkMode;
-                  });
-                },
-                child: Text('Toggle Theme'),
-              ),
+  
+      body: Column(
+        children: [
+          Center(
+            child: CircleAvatar(
+              radius: 200,backgroundColor: const Color.fromARGB(255, 186, 201, 213),
+            ),
             
-       ), ),
+          ),SizedBox(height: 10,),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(decoration: InputDecoration(labelText: "Name"),
+            ),
+            
+          ),
+          SizedBox(height: 10,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(decoration: InputDecoration(labelText: "Phone"),),
+          ),
+
+          SizedBox(height: 10,),
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: TextField(decoration: InputDecoration(labelText: "Password"),),
+           ),
+           SizedBox(height: 10,),
+            ElevatedButton(onPressed: (){
+              setState(() {
+                isDarkMode=!isDarkMode;
+              });
+            }, child: Text("Toggle Theme"))
+        ],
+      ),
+        ),
             );
           
         

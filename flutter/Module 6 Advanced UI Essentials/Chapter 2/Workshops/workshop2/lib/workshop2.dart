@@ -42,6 +42,8 @@ class _ThemedApp16State extends State<ThemedApp16> {
                   onPressed: () {
                     setState(() {
                      // add the calculation here 
+                     _boxSize += 20.0;
+                      if (_boxSize > 300.0) _boxSize = 300.0;
                     });
                   },
                   child: Text('Enlarge Box'),
@@ -51,6 +53,8 @@ class _ThemedApp16State extends State<ThemedApp16> {
                   onPressed: () {
                     setState(() {
                       // add the calculation here
+                       _boxSize -= 20.0;
+                      if (_boxSize < 50.0) _boxSize = 50.0;
                     });
                   },
                   child: Text('Shrink Box'),
