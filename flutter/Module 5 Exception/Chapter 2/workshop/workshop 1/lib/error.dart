@@ -31,6 +31,24 @@ class _FormScreenState extends State<FormScreen> {
       appBar: AppBar(
         title: const Text('Form Screen'),
       ),
+<<<<<<< HEAD
+
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                for (var i = 1; i <= 15; i++)
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: 'Field $i',
+                    ),
+=======
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -45,8 +63,25 @@ class _FormScreenState extends State<FormScreen> {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     labelText: 'Field $i',
+>>>>>>> 4433ca6f88e4896f184495f5af6ee9f95170c11e
                   ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Process form data
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Form submitted successfully')),
+                      );
+                    }
+                  },
+                  child: const Text('Submit'),
                 ),
+<<<<<<< HEAD
+              ],
+            ),
+=======
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -61,6 +96,7 @@ class _FormScreenState extends State<FormScreen> {
                 child: const Text('Submit'),
               ),
             ],
+>>>>>>> 4433ca6f88e4896f184495f5af6ee9f95170c11e
           ),
         ),
       ),
