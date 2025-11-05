@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 
 class Contact extends StatelessWidget {
@@ -86,16 +85,15 @@ class Contact extends StatelessWidget {
 
   // Function to launch email app
   Future<void> _launchEmail(String email) async {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: email,
-    );
-    if (await canLaunch(emailLaunchUri.toString())) {
-      await launch(emailLaunchUri.toString());
-    } else {
-      throw 'Could not launch $emailLaunchUri';
-    }
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: email,
+  );
+
+  if (!await launchUrl(emailLaunchUri)) {
+    throw Exception('Could not launch $emailLaunchUri');
   }
+}
 
   // Function to launch phone app
 
@@ -106,3 +104,4 @@ class Contact extends StatelessWidget {
 
 
 }
+
