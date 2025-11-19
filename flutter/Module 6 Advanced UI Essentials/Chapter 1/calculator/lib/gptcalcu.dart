@@ -1,6 +1,12 @@
 import 'package:activitycalcu/buttons.dart';
 import 'package:flutter/material.dart';
 
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Calculatorscreen(),));
+}
+
 class Calculatorscreen extends StatefulWidget {
   const Calculatorscreen({super.key});
 
@@ -17,7 +23,7 @@ class _CalculatorscreenState extends State<Calculatorscreen> {
   Widget build(BuildContext context) {
     final screensize = MediaQuery.of(context).size; // screen size edukkan
 
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.black,
       body: Column(
         children: [
           // ✅ Display Area

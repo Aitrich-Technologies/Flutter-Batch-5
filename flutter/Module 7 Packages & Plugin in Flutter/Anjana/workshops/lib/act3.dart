@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+void main(){
+  runApp(
+    MaterialApp(
+      home:Contact() ,
+    )
+  );
+}
+
+class Contact extends StatelessWidget {
+  const Contact({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Contact Us"),
+        backgroundColor: Colors.deepOrangeAccent,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: Icon(Icons.contact_mail), // Contact icon
+                  ),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+              ),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Message',
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Add functionality to submit form
+                },
+                child: const Text("Submit"),
+              ),
+              const SizedBox(height: 20),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  children: [
+                    const Text(
+                      "Info",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    GestureDetector(
+                      onTap: () => _launchEmail('email@example.com'),
+                      child: const Icon(Icons.email),
+                    ),
+                    const SizedBox(height: 50),
+                    GestureDetector(
+                      onTap: () => _launchcall('9964537845'),
+                      child: Icon(Icons.call),
+                    ),SizedBox(height: 50,)
+                    ,GestureDetector(
+                      onTap: () => _launchlocation(10.0159, 76.3419),
+                      child: Icon(Icons.business_outlined),
+                    )
+                   
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Function to launch email app
+  Future<void> _launchEmail(String email) async {
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: email,
+  );
+
+  if (!await launchUrl(emailLaunchUri)) {
+    throw Exception('Could not launch $emailLaunchUri');
+  }
+}
+
+  // Function to launch phone app
+
+
+
+
+  // Function to launch locate or map app
+
+
+}
+
+Future<void> _launchlocation(double d, double e)async {
+  final Uri locationlaunch = Uri(
+    scheme: 'geo',
+    path: "$d $e"
+  );
+  if (!await launchUrl(locationlaunch)) {
+    throw Exception("could not launch$locationlaunch");
+    
+  }
+}
+
+Future<void> _launchcall(String call) async {
+  final Uri callluancher = Uri(
+    scheme: "tel",
+    path: '+912345667788',
+  );
+  if (!await launchUrl(callluancher)) {
+    throw Exception('could not launch $callluancher');
+    
+  }
+
+}
+
