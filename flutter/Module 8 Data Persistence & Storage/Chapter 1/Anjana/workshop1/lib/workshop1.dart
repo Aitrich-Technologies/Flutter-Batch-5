@@ -39,6 +39,7 @@ class _ToDoListState extends State<ToDoList> {
     setState(() {
       tasks = prefs.getStringList('tasks') ?? [];
     });
+  
   }
 
   void _saveTasks() async {
@@ -52,8 +53,9 @@ class _ToDoListState extends State<ToDoList> {
       setState(() {
         tasks.add(newTask);
         _controller.clear();
-        _saveTasks();
+       
       });
+      _saveTasks();
     }
   }
 
@@ -118,58 +120,3 @@ class _ToDoListState extends State<ToDoList> {
   }
 }
 
-
-// import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
-// void main(){
-//   runApp(MaterialApp(home: DeleteDataScreen(),));
-// }
-
-
-// class DeleteDataScreen extends StatefulWidget {
-//   @override
-//   _DeleteDataScreenState createState() => _DeleteDataScreenState();
-// }
-
-// class _DeleteDataScreenState extends State<DeleteDataScreen> {
-//   String? _storedValue;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _loadData();
-//   }
-
-//   Future<void> _loadData() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     setState(() {
-//       _storedValue = prefs.getString('myKey'); // Replace 'myKey' with your actual key
-//     });
-//   }
-
-//   Future<void> _deleteSpecificData() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     await prefs.remove('myKey'); // Replace 'myKey' with the key to delete
-//     _loadData(); // Reload data to reflect the change
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Delete SharedPreferences Data')),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text('Stored Value: ${_storedValue ?? "No value stored"}'),
-//             ElevatedButton(
-//               onPressed: _deleteSpecificData,
-//               child: Text('Delete Specific Data'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
